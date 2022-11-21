@@ -42,8 +42,8 @@ spec:
               key: dsn
         resources:
           limits:
-            memory: 512mi
-            cpu: 50m
+            memory: 256mi
+            cpu: 25m
 ---
 apiVersion: v1
 kind: Service
