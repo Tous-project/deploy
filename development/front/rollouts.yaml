@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name:  dev-chat-front-rollout
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     canary:
       steps:
