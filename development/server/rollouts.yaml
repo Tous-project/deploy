@@ -15,7 +15,7 @@ spec:
         - pause: {duration: 60}
         - setWeight: 80
         - pause: {duration: 60}
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: dev-chat-server
