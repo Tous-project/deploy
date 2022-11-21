@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name:  dev-chat-front-rollout
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     canary:
       steps:
@@ -15,7 +15,7 @@ spec:
         - pause: {duration: 60}
         - setWeight: 80
         - pause: {duration: 60}
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: dev-chat-front
@@ -34,8 +34,8 @@ spec:
           protocol: TCP
         resources:
           limits:
-            memory: 256Mi
-            cpu: 25m
+            memory: 512Mi
+            cpu: 50m
 ---
 apiVersion: v1
 kind: Service
