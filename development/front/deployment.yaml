@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  dev-chat-front-deployment
+  name:  dev-chat-front
   labels:
     app: dev-chat-server
 spec:
