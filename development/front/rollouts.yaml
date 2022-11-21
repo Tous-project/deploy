@@ -28,8 +28,6 @@ spec:
       - name: dev-chat-front
         imagePullPolicy: Always
         image: ghcr.io/tous-project/chat-front/chat-front:35813122a5a283d17960090e7c3538dcf99e6307
-        command: ["python3"]
-        args: ["main.py"]
         ports:
         - name: http
           containerPort: 8080
