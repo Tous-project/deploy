@@ -18,8 +18,8 @@ spec:
         name: dev-postgres
         resources:
           limits:
-            memory: 128Mi
-            cpu: 50m
+            memory: 1024Mi
+            cpu: 100m
         env:
         - name: POSTGRES_USER
           valueFrom:

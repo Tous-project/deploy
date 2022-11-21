@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name:  dev-chat-server-rollout
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     canary:
       steps:
@@ -42,8 +42,8 @@ spec:
               key: dsn
         resources:
           limits:
-            memory: 128Mi
-            cpu: 20m
+            memory: 512mi
+            cpu: 50m
 ---
 apiVersion: v1
 kind: Service
