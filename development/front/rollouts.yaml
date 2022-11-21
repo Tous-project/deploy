@@ -34,8 +34,8 @@ spec:
           protocol: TCP
         resources:
           limits:
-            memory: 1024Mi
-            cpu: 100m
+            memory: 512Mi
+            cpu: 50m
 ---
 apiVersion: v1
 kind: Service
