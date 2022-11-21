@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name:  dev-chat-front-rollout
+spec:
+  replicas: 3
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {duration: 60}
+        - setWeight: 40
+        - pause: {duration: 60}
+        - setWeight: 60
+        - pause: {duration: 60}
+        - setWeight: 80
+        - pause: {duration: 60}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: dev-chat-front
+  template:
+    metadata:
+      labels:
+        app: dev-chat-front
+    spec:
+      containers:
+      - name: dev-chat-front
+        imagePullPolicy: Always
+        image: ghcr.io/tous-project/chat-front/chat-front:35813122a5a283d17960090e7c3538dcf99e6307
+        command: ["python3"]
+        args: ["main.py"]
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 50m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-chat-front-service
+spec:
+  type:  NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30002
+    protocol: TCP
+    name: http
+  selector:
+    app: dev-chat-front
