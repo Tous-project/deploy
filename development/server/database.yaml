@@ -3,17 +3,28 @@ kind: Deployment
 metadata:
   name: dev-database
   labels:
-    app: dev-postgres
+    app: dev-database
 spec:
   selector:
     matchLabels:
-      app: dev-postgres
+      app: dev-database
   template:
     metadata:
       labels:
-        app: dev-postgres
+        app: dev-database
     spec:
       containers:
+      - image: redis:7-alpine3.17
+        name: dev-redis
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 30m
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
       - image: postgres:15.0
         name: dev-postgres
         resources:
@@ -44,16 +55,18 @@ spec:
       volumes:
         - name: postgres-data
           emptyDir: {}
+        - name: redis-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name:  dev-postgres-service
+  name:  dev-database-service
   labels:
-    app: dev-postgres-service
+    app: dev-database-service
 spec:
   selector:
-    app: dev-postgres
+    app: dev-database
   type: NodePort
   ports:
     - port: 5432
@@ -61,3 +74,8 @@ spec:
       nodePort: 30004
       protocol: TCP
       name: dev-postgres
+    - port: 6379
+      targetPort: 6379
+      nodePort: 30005
+      protocol: TCP
+      name: dev-redis

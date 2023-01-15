@@ -30,6 +30,11 @@ spec:
             secretKeyRef:
               name: database
               key: dsn
+        - name: REDIS_DSN
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: redis_dsn
         resources:
           limits:
             memory: 256Mi
