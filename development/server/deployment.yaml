@@ -25,7 +25,7 @@ spec:
           containerPort: 8000
           protocol: TCP
         env:
-        - name: DSN
+        - name: POSTGRES_DSN
           valueFrom:
             secretKeyRef:
               name: database
